@@ -1,10 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const db = require('./config/db');
 const authRouter = require('./routes/auth');
 const todosRouter = require('./routes/todos');
+const cors = require('cors');
 
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 
@@ -18,6 +19,8 @@ db.then(() => console.log('MongoDB Connected'))
 app.get("/", (req, res) => {
     res.json("Ini Dari express mongoose firman")
 })
+
+app.use(cors())
 app.use('/auth', authRouter);
 app.use('/todos', todosRouter);
 
