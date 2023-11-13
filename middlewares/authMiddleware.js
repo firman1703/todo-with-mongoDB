@@ -4,10 +4,10 @@ require('dotenv').config()
 secretKey = process.env.KEY
 
 function authMiddleware(req, res, next) {
-    const token = req.header.authorization;
+    const token = req.header('auth-token');
 
     if (!token) {
-        return res.status(401).json({ message: 'Takda token, authorization Ditolak' });
+        return res.status(401).json({ message: 'Tak Da Token, authorization Ditolak' });
     }
 
     try {
@@ -16,7 +16,7 @@ function authMiddleware(req, res, next) {
         next();
     } catch (error) {
         console.error(error);
-        res.status(401).json({ message: 'Token gak valid' });
+        res.status(401).json({ message: 'Token tak Da' });
     }
 }
 
